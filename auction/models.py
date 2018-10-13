@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Users(models.Model):
+class User(models.Model):
     username = models.CharField(max_length=100)
     email = models.CharField(max_length=150)
     password = models.CharField(max_length=200)
@@ -9,8 +9,8 @@ class Users(models.Model):
     user_image = models.ImageField(upload_to='profile_image', blank=True)
 
 
-class Products(models.Model):
-    seller_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+class Product(models.Model):
+    seller_id = models.ForeignKey(User, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=200)
     product_desc = models.CharField(max_length=1000)
     creation_time = models.DateTimeField(auto_now_add=True)
@@ -20,9 +20,9 @@ class Products(models.Model):
     product_image = models.ImageField(upload_to='product_images')
 
 
-class Bids(models.Model):
-    product_id = models.ForeignKey(Products, on_delete=models.CASCADE)
-    bidder_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+class Bid(models.Model):
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    bidder_id = models.ForeignKey(User, on_delete=models.CASCADE)
     bid_time = models.DateTimeField(auto_now_add=True)
     bid_price = models.IntegerField()
-    winning_bid = models.IntegerField()
+    winning_bid = models.IntegerField(blank=True)
