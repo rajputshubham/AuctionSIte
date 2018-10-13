@@ -25,4 +25,4 @@ class Bid(models.Model):
     bidder_id = models.ForeignKey(User, on_delete=models.CASCADE)
     bid_time = models.DateTimeField(auto_now_add=True)
     bid_price = models.IntegerField()
-    winning_bid = models.IntegerField(blank=True)
+    is_winning = models.BooleanField(default = False)
