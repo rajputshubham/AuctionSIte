@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from auction import views as core_views
+from django.contrib.auth import login, logout
+from django.conf.urls import url
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r'^$', core_views.home, name='home'),
+    url(r'^login/$', login, name='login'),
+    url(r'^logout/$', logout, {'template_page': 'login.html'}, name='logout'),
+    url(r'^signup/$', core_views.signup, name='signup'),
+    url(r'^productsignup/$', core_views.productsignup, name='productsignup'),
 ]
